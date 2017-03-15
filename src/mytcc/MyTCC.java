@@ -32,38 +32,14 @@ public class MyTCC {
         Sensor sn14 = new Sensor(50, 30); WSN.addSensor(sn14);
         Sensor sn15 = new Sensor(140, 30); WSN.addSensor(sn15);
         
-        int size = (int)(WSN.area()/Sensor.area());
-        
-        RelayNodeNetwork[] rn = new RelayNodeNetwork[10];
+        Population pop = new Population(10, true);
         
         for (int i = 0; i < 10; i++) {
-            RelayNodeNetwork x = new RelayNodeNetwork();
-            rn[i] = x;
+            System.out.println(pop.getRnNetwork(i).getFitness());
         }
-        
-        for (int i = 0; i < 10; i++) {
-            System.out.println(rn[i].getFitness());
-        }
-        
-        RelayNodeNetwork teste = new RelayNodeNetwork(15);
-        teste.replaceRelayNode(0, sn1);
-        teste.replaceRelayNode(1, sn2);
-        teste.replaceRelayNode(2, sn3);
-        teste.replaceRelayNode(3, sn4);
-        teste.replaceRelayNode(4, sn5);
-        teste.replaceRelayNode(5, sn6);
-        teste.replaceRelayNode(6, sn7);
-        teste.replaceRelayNode(7, sn8);
-        teste.replaceRelayNode(8, sn9);
-        teste.replaceRelayNode(9, sn10);
-        teste.replaceRelayNode(10, sn11);
-        teste.replaceRelayNode(11, sn12);
-        teste.replaceRelayNode(12, sn13);
-        teste.replaceRelayNode(13, sn14);
-        teste.replaceRelayNode(14, sn15);
         
         System.out.println("");
-        System.out.println(teste.getFitness());
+        System.out.println(pop.getFittest().getFitness());
         
     }
     
