@@ -47,13 +47,13 @@ public class MyTCC {
         Sensor sn15 = new Sensor(140, 30);
         WSN.addSensor(sn15);
 
-        Population pop = new Population(30, true);
+        Population pop = new Population(60, true);
 
         for (int i = 0; i < 10; i++) {
             System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size());
         }
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 50; i++) {
             pop = GA.evolvePopulation(pop);
         }
 
