@@ -38,12 +38,11 @@ public class GA {
             RelayNodeNetwork child = crossover(parent1, parent2);
             newPopulation.addRnNetwork(i, child);
         }
-        
-        /*MUTACAO*/
-        /*for (int i = elitismOffset = 0; i < newPopulation.size(); i++) {
-            mutate(newPopulation.getRnNetwork(i));
-        }*/
 
+        /*MUTACAO*/
+        for (int i = elitismOffset = 0; i < newPopulation.size(); i++) {
+            mutate(newPopulation.getRnNetwork(i));
+        }
         return newPopulation;
     }
 
@@ -101,16 +100,26 @@ public class GA {
         for (int i = 0; i < childSize; i++) {
             //coloca os primeiros elementos do maior pai
             if (i < startPos) {
-                child.replaceRelayNode(i, biggestParent.getRelayNode(i));
+                int X = biggestParent.getRelayNode(i).getX();
+                int Y = biggestParent.getRelayNode(i).getY();
+                Sensor newRelayNode = new Sensor(X, Y);
+                child.replaceRelayNode(i, newRelayNode);
             } //coloca os elementos intermediários sorteados do menor pai
             else if (i <= endPos) {
-                child.replaceRelayNode(i, smallerParent.getRelayNode(i));
+                int X = smallerParent.getRelayNode(i).getX();
+                int Y = smallerParent.getRelayNode(i).getY();
+                Sensor newRelayNode = new Sensor(X, Y);
+                child.replaceRelayNode(i, newRelayNode);
             } //completa o filho com os elementos restantes do maior pai
             else {
-                child.replaceRelayNode(i, biggestParent.getRelayNode(i));
+                int X = biggestParent.getRelayNode(i).getX();
+                int Y = biggestParent.getRelayNode(i).getY();
+                Sensor newRelayNode = new Sensor(X, Y);
+                child.replaceRelayNode(i, newRelayNode);
             }
         }
-        
+
+        // Remove o relay node que não tocar em nenhum ponto da WSN
         for (int i = 0; i < child.size(); i++) {
             if (child.getRelayNode(i).reachWSN() == false) {
                 child.removeRelayNode(i);
@@ -126,9 +135,9 @@ public class GA {
         //mudando ou não de posição
         for (int i = 0; i < rnNetwork.size(); i++) {
             if (Math.random() < mutationRate) {
-                int newX = (int)(Math.random()*WSN.getHighestX());
-                int newY = (int)(Math.random()*WSN.getHighestY());
-                
+                int newX = (int) (Math.random() * WSN.getHighestX());
+                int newY = (int) (Math.random() * WSN.getHighestY());
+
                 rnNetwork.changeRNposition(i, newX, newY);
             }
         }

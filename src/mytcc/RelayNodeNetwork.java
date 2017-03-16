@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class RelayNodeNetwork {
 
-    private ArrayList relayNodeList = new ArrayList<Sensor>();
+    private ArrayList<Sensor> relayNodeList = new ArrayList<Sensor>();
 
     public RelayNodeNetwork() {
 
@@ -61,6 +61,10 @@ public class RelayNodeNetwork {
     public Sensor getRelayNode(int index) {
         return (Sensor) (this.relayNodeList.get(index));
     }
+    
+    public ArrayList<Sensor> getRelayNodeList() {
+        return this.relayNodeList;
+    }
 
     // tamanho deste RN
     public int size() {
@@ -90,7 +94,8 @@ public class RelayNodeNetwork {
     }
     
     public double getFitness() {
-        double fitness = 1.0/((double)size()+Math.pow((double)numberOfUncoveredSensors(),2));
+        double weight = (double)(WsnGraph.getNumberOfUndirectedGraphs(getRelayNodeList()));
+        double fitness = (double)(size())+Math.pow((double)numberOfUncoveredSensors(),2)*(weight);
         return fitness;
     }    
     

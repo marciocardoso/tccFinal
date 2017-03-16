@@ -5,6 +5,9 @@
  */
 package mytcc;
 
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+
 /**
  *
  * @author Labin-L1
@@ -46,21 +49,28 @@ public class MyTCC {
         WSN.addSensor(sn14);
         Sensor sn15 = new Sensor(140, 30);
         WSN.addSensor(sn15);
-
-        Population pop = new Population(60, true);
+        
+        
+        /*GRAFO DA WSN*/
+        for (int i = 0; i < WSN.size(); i++) {
+            WsnGraph.addVertex(WSN.getSensor(i));
+        }     
+        /*GRAFO DA WSN*/
+        
+        Population pop = new Population(500, true);
 
         for (int i = 0; i < 10; i++) {
-            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size());
+            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size() + " " + WsnGraph.getNumberOfUndirectedGraphs(pop.getRnNetwork(i).getRelayNodeList()));
         }
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             pop = GA.evolvePopulation(pop);
         }
 
         System.out.println("");
         for (int i = 0; i < 10; i++) {
-            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size());
-        }
+            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size() + " " + WsnGraph.getNumberOfUndirectedGraphs(pop.getRnNetwork(i).getRelayNodeList()));
+        }        
 
     }
 
