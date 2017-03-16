@@ -5,8 +5,13 @@
  */
 package mytcc;
 
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.SingleGraph;
+import eu.jacquet80.minigeo.*;
+
+import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.Security;
+import org.random.rjgodoy.trng.RjgodoyProvider;
 
 /**
  *
@@ -17,7 +22,7 @@ public class MyTCC {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
 
         Sensor sn1 = new Sensor(10, 20);
         WSN.addSensor(sn1);
@@ -49,29 +54,30 @@ public class MyTCC {
         WSN.addSensor(sn14);
         Sensor sn15 = new Sensor(140, 30);
         WSN.addSensor(sn15);
-        
-        
+
         /*GRAFO DA WSN*/
         for (int i = 0; i < WSN.size(); i++) {
             WsnGraph.addVertex(WSN.getSensor(i));
-        }     
+        }
         /*GRAFO DA WSN*/
-        
-        Population pop = new Population(50, true);
+
+        Population pop = new Population(200, true);
 
         for (int i = 0; i < 10; i++) {
-            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size() + " " + WsnGraph.getNumberOfUndirectedGraphs(pop.getRnNetwork(i).getRelayNodeList()));
+            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + WsnGraph.numberOfGraphs(pop.getRnNetwork(i).getRelayNodeList()) + " " + pop.getRnNetwork(i).size());
         }
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             pop = GA.evolvePopulation(pop);
         }
 
         System.out.println("");
         for (int i = 0; i < 10; i++) {
-            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size() + " " + WsnGraph.getNumberOfUndirectedGraphs(pop.getRnNetwork(i).getRelayNodeList()));
-        }        
-
+            System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + WsnGraph.numberOfGraphs(pop.getRnNetwork(i).getRelayNodeList()));
+        }
+        
+        System.out.println("");
+        System.out.println(pop.getFittest().numberOfUncoveredSensors() + " " + WsnGraph.numberOfGraphs(pop.getFittest().getRelayNodeList()) + " " + pop.getFittest().size());
     }
 
 }

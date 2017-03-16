@@ -93,9 +93,21 @@ public class RelayNodeNetwork {
         return numberOfUncovered;
     }
     
+    //checa se um sensor desta rede alcanca outro sensor
+    public boolean reachAnyOtherRelayNode(int relayNodeIndex) {        
+        for (int i = 0; i < size(); i++) {
+            if (i != relayNodeIndex) {
+                if (getRelayNode(relayNodeIndex).distanceTo(getRelayNode(i)) <= ConstantNumber.SENSOR_RANGE) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     public double getFitness() {
-        double weight = (double)(WsnGraph.getNumberOfUndirectedGraphs(getRelayNodeList()));
-        double fitness = 1.0/((double)(size())+Math.pow((double)numberOfUncoveredSensors(),2)*(weight));
+        double weight = (double)(WsnGraph.numberOfGraphs(getRelayNodeList()));
+        double fitness = 1.0/(Math.pow(weight, 3.0) + (double)numberOfUncoveredSensors());
         return fitness;
     }    
     
