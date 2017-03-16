@@ -57,7 +57,7 @@ public class MyTCC {
         }     
         /*GRAFO DA WSN*/
         
-        Population pop = new Population(500, true);
+        Population pop = new Population(50, true);
 
         for (int i = 0; i < 10; i++) {
             System.out.println(pop.getRnNetwork(i).numberOfUncoveredSensors() + " " + pop.getRnNetwork(i).size() + " " + WsnGraph.getNumberOfUndirectedGraphs(pop.getRnNetwork(i).getRelayNodeList()));

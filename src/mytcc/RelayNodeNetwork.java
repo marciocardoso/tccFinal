@@ -95,7 +95,7 @@ public class RelayNodeNetwork {
     
     public double getFitness() {
         double weight = (double)(WsnGraph.getNumberOfUndirectedGraphs(getRelayNodeList()));
-        double fitness = (double)(size())+Math.pow((double)numberOfUncoveredSensors(),2)*(weight);
+        double fitness = 1.0/((double)(size())+Math.pow((double)numberOfUncoveredSensors(),2)*(weight));
         return fitness;
     }    
     
