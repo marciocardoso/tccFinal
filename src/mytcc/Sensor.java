@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mytcc;
+
 /**
  *
  * @author Labin-L1
@@ -44,7 +45,7 @@ public class Sensor {
     public void setY(int newY) {
         this.y = newY;
     }
-    
+
     //calcula e retorna a distance deste sensor até qualquer outro        
     public double distanceTo(Sensor sensor) {
         int xDistance = Math.abs(getX() - sensor.getX());
@@ -54,9 +55,22 @@ public class Sensor {
 
         return distance;
     }
-    
+
     //retorna a area de cobertura do sensor
     public static double area() {
         return (Math.PI * ConstantNumber.SENSOR_RANGE * ConstantNumber.SENSOR_RANGE);
+    }
+
+    //checa se um RN toca em alguem
+    public boolean reachWSN() {
+        //assume-se que o nó não toca 
+        boolean reach = false;
+        // para cada RN
+        for (int i = 0; i < WSN.size(); i++) {
+            if (this.distanceTo(WSN.getSensor(i)) <= ConstantNumber.SENSOR_RANGE) {
+                reach = true;
+            }            
+        }
+        return reach;
     }
 }

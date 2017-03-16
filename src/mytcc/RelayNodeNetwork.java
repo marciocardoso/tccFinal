@@ -92,7 +92,6 @@ public class RelayNodeNetwork {
     public double getFitness() {
         double fitness = 1.0/((double)size()+Math.pow((double)numberOfUncoveredSensors(),2));
         return fitness;
-    }
-    
+    }    
     
 }
