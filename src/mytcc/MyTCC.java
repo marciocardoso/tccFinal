@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.Security;
+import javax.swing.JPanel;
 import org.random.rjgodoy.trng.RjgodoyProvider;
 
 /**
@@ -34,7 +35,7 @@ public class MyTCC {
         WSN.addSensor(sn4);
         Sensor sn5 = new Sensor(130, 70);
         WSN.addSensor(sn5);
-        Sensor sn6 = new Sensor(80, 40);
+        Sensor sn6 = new Sensor(80, 290);
         WSN.addSensor(sn6);
         Sensor sn7 = new Sensor(30, 100);
         WSN.addSensor(sn7);
@@ -42,7 +43,7 @@ public class MyTCC {
         WSN.addSensor(sn8);
         Sensor sn9 = new Sensor(40, 50);
         WSN.addSensor(sn9);
-        Sensor sn10 = new Sensor(50, 90);
+        Sensor sn10 = new Sensor(320, 90);
         WSN.addSensor(sn10);
         Sensor sn11 = new Sensor(140, 110);
         WSN.addSensor(sn11);
@@ -78,6 +79,13 @@ public class MyTCC {
         
         System.out.println("");
         System.out.println(pop.getFittest().numberOfUncoveredSensors() + " " + WsnGraph.numberOfGraphs(pop.getFittest().getRelayNodeList()) + " " + pop.getFittest().size());
+    
+        System.out.println("");
+        for (int i = 0; i < pop.getFittest().size(); i++) {
+            System.out.println(pop.getFittest().degreeOf(i));
+        }       
+        
+        
     }
 
 }

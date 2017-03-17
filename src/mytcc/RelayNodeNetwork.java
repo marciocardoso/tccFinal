@@ -94,15 +94,16 @@ public class RelayNodeNetwork {
     }
     
     //checa se um sensor desta rede alcanca outro sensor
-    public boolean reachAnyOtherRelayNode(int relayNodeIndex) {        
+    public int degreeOf(int relayNodeIndex) {
+        int degree = 0;
         for (int i = 0; i < size(); i++) {
             if (i != relayNodeIndex) {
                 if (getRelayNode(relayNodeIndex).distanceTo(getRelayNode(i)) <= ConstantNumber.SENSOR_RANGE) {
-                    return true;
+                    degree++;
                 }
             }
         }
-        return false;
+        return degree;
     }
     
     public double getFitness() {

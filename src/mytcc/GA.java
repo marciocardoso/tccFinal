@@ -121,7 +121,7 @@ public class GA {
 
         // Remove o relay node que não alcançar nem a WSN, nem outro relay Node
         for (int i = 0; i < child.size(); i++) {
-            if (child.getRelayNode(i).reachWSN() == false && child.reachAnyOtherRelayNode(i) == false) {
+            if (child.getRelayNode(i).reachWSN() == false && child.degreeOf(i) == 0 || child.degreeOf(i) > 2) {
                 child.removeRelayNode(i);
                 break;
             }
